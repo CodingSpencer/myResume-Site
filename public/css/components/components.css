@@ -1,0 +1,9 @@
+/* Components */
+@import "./theme-toggle.css";
+
+/* Partials */
+@import "./partials/header.css";   
+@import "./partials/footer.css";
+
+/* Pages */
+
