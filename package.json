@@ -11,10 +11,11 @@
     "preview": "node server/index.js"
   },
   "dependencies": {
-    "@astrojs/svelte": "^5.7.3",
-    "astro": "^4.16.19",
+    "@astrojs/svelte": "^9.0.1",
+    "astro": "^7.1.6",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "mongodb": "^7.5.0",
     "svelte": "^5.0.0"
   },
   "devDependencies": {
