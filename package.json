@@ -6,17 +6,19 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:astro\"",
     "dev:astro": "astro dev --host 0.0.0.0 --port 4321",
-    "dev:server": "node server/index.js",
+    "dev:server": "node server/server.js",
     "build": "astro build",
-    "preview": "node server/index.js"
+    "preview": "node server/server.js"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.10",
     "@astrojs/svelte": "^9.0.1",
     "astro": "^7.1.6",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "mongodb": "^7.5.0",
-    "svelte": "^5.0.0"
+    "svelte": "^5.56.8",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

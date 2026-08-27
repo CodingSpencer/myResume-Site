@@ -1,0 +1,80 @@
+---
+import MainLayout from "../../layouts/Main.astro";
+---
+
+<MainLayout title="Sandbox">
+    <div class="page">
+        <header class="page-header">
+            <p class="eyebrow">Experiments &amp; Tools</p>
+            <h1>Sandbox</h1>
+            <p class="lead">
+                A place for experiments, small tools, and things I'm tinkering with. Content coming soon.
+            </p>
+        </header>
+
+        <div class="placeholder-box">
+            <p class="placeholder-title">Nothing here yet</p>
+            <p class="placeholder-body">
+                I'm currently building out the sandbox area. Future additions may include CLI tools,
+                scripts, and interactive demos.
+            </p>
+        </div>
+    </div>
+</MainLayout>
+
+<style>
+    .page {
+        max-width: clamp(20rem, 90vw, 60rem);
+        margin: 0 auto;
+        padding: 2.5rem 3rem;
+    }
+
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .eyebrow {
+        margin: 0;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-accent, #2563eb);
+    }
+
+    h1 {
+        margin: 0.25rem 0 0;
+        font-size: clamp(2rem, 5vw, 3.25rem);
+        line-height: 1.1;
+    }
+
+    .lead {
+        margin: 0.75rem 0 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--color-muted, #4b5563);
+    }
+
+    .placeholder-box {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.5rem;
+        background: var(--color-bg-secondary, #f3f4f6);
+        border: 1px dashed var(--color-border, #d1d5db);
+        border-radius: 8px;
+    }
+
+    .placeholder-title {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+
+    .placeholder-body {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--color-muted, #4b5563);
+    }
+</style>

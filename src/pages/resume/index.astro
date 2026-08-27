@@ -1,0 +1,454 @@
+---
+import MainLayout from "../../layouts/Main.astro";
+import resumeData from "../../data/resume.js";
+import { ICONS } from "../../data/icons.js";
+
+const { title } = Astro.props;
+---
+
+<MainLayout title={title || "Home"}>
+    <div class="resume">
+        <!-- Contact Header (top) -->
+        <div class="resume-contact-header">
+            <div class="resume-contact-head">
+                <div class="resume-contact-title">
+                    <h1 class="resume-contact-name">{resumeData.name}</h1>
+                    <span class="resume-contact-role">Software Engineer</span>
+                </div>
+                <div class="resume-contact-icons">
+                    <a href={`mailto:${resumeData.contact.email}`} class="contact-icon-link" aria-label="Email">
+                        <span set:html={ICONS.email} />
+                    </a>
+                    <a href={`tel:${resumeData.contact.phone}`} class="contact-icon-link" aria-label="Phone">
+                        <span set:html={ICONS.phone} />
+                    </a>
+                    <a href={resumeData.contact.linkedin} target="_blank" rel="noopener noreferrer" class="contact-icon-link" aria-label="LinkedIn">
+                        <span set:html={ICONS.linkedin} />
+                    </a>
+                </div>
+            </div>
+            <div class="resume-contact-info">
+                <a class="resume-contact-value" href={`mailto:${resumeData.contact.email}`}>{resumeData.contact.email}</a>
+                <a class="resume-contact-value" href={`tel:${resumeData.contact.phone}`}>{resumeData.contact.phone}</a>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <section class="resume-section">
+            <h2 class="section-title">About</h2>
+            <p class="summary">{resumeData.summary}</p>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="resume-section">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-list">
+                {resumeData.experience.map((job) => (
+                    <article class="experience-item">
+                        <header class="experience-header">
+                            <div class="experience-title-group">
+                                <h3 class="experience-title">{job.title}</h3>
+                                <p class="experience-company">{job.company}</p>
+                            </div>
+                            <div class="experience-meta">
+                                <span class="experience-location">{job.location}</span>
+                                <span class="experience-date">{job.date}</span>
+                            </div>
+                        </header>
+                        <ul class="experience-bullets">
+                            {job.bullets.map((bullet) => (
+                                <li>{bullet}</li>
+                            ))}
+                        </ul>
+                    </article>
+                ))}
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="resume-section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-list">
+                {resumeData.education.map((edu) => (
+                    <article class="education-item">
+                        <h3 class="education-degree">{edu.degree}</h3>
+                        <p class="education-institution">{edu.institution}</p>
+                        <div class="education-meta">
+                            <span class="education-location">{edu.location}</span>
+                            <span class="education-date">{edu.date}</span>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="resume-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Languages</h3>
+                    <ul class="skill-list">
+                        {resumeData.skills.languages.map((skill) => (
+                            <li class="skill-tag">{skill}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Frameworks & Tools</h3>
+                    <ul class="skill-list">
+                        {resumeData.skills.frameworksAndTools.map((skill) => (
+                            <li class="skill-tag">{skill}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Domains</h3>
+                    <ul class="skill-list">
+                        {resumeData.skills.domains.map((skill) => (
+                            <li class="skill-tag">{skill}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="resume-section">
+            <h2 class="section-title">Certifications</h2>
+            <ul class="certifications-list">
+                {resumeData.certifications.map((cert) => (
+                    <li class="certification-item">
+                        <span class="certification-name">{cert.name}</span>
+                        <span class="certification-detail">{cert.detail}</span>
+                    </li>
+                ))}
+            </ul>
+        </section>
+    </div>
+</MainLayout>
+
+<style>
+    .resume {
+        max-width: clamp(20rem, 90vw, 70rem);
+        margin: 0 auto;
+        padding: 2.5rem 3rem;
+        background: var(--color-bg-secondary, #f3f4f6);
+    }
+
+    /* .resume {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        padding: 0 5rem;
+    } */
+
+    .resume-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text, #111827);
+        margin: 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--color-accent, #2563eb);
+        padding-top: 3rem;
+    }
+
+    .resume-section:first-of-type .section-title {
+        padding-top: 0;
+    }
+
+    /* Summary */
+    .summary {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--color-text, #111827);
+        margin: 0;
+    }
+
+    /* Experience */
+    .experience-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+    }
+
+    .experience-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .experience-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .experience-title-group {
+        flex: 1;
+    }
+
+    .experience-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--color-text, #111827);
+        margin: 0;
+    }
+
+    .experience-company {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--color-accent, #2563eb);
+        margin: 0;
+    }
+
+    .experience-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+        color: var(--color-muted, #6b7280);
+    }
+
+    .experience-bullets {
+        margin: 0;
+        padding-left: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .experience-bullets li {
+        line-height: 1.6;
+        color: var(--color-text, #111827);
+    }
+
+    /* Education */
+    .education-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .education-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .education-degree {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--color-text, #111827);
+        margin: 0;
+    }
+
+    .education-institution {
+        font-size: 1rem;
+        color: var(--color-accent, #2563eb);
+        margin: 0;
+    }
+
+    .education-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+        color: var(--color-muted, #6b7280);
+    }
+
+    /* Skills */
+    .skills-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .skill-category {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .skill-category-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--color-text, #111827);
+        margin: 0;
+    }
+
+    .skill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .skill-tag {
+        display: inline-block;
+        padding: 0.35rem 0.75rem;
+        background: var(--color-bg-secondary, #f3f4f6);
+        border: 1px solid var(--color-border, #e5e7eb);
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: var(--color-text, #111827);
+    }
+
+    /* Certifications */
+    .certifications-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .certification-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        padding: 0.75rem;
+        background: var(--color-bg-secondary, #f3f4f6);
+        border-left: 3px solid var(--color-accent, #2563eb);
+    }
+
+    .certification-name {
+        font-weight: 600;
+        color: var(--color-text, #111827);
+    }
+
+    .certification-detail {
+        font-size: 0.9rem;
+        color: var(--color-muted, #6b7280);
+    }
+
+    /* Contact Header (top) */
+    .resume-contact-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem 1.75rem;
+        background: var(--color-bg, #fff);
+        border: 1px solid var(--color-border, #e5e7eb);
+        border-left: 4px solid var(--color-accent, #2563eb);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .resume-contact-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .resume-contact-title {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .resume-contact-name {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--color-text, #111827);
+        margin: 0;
+    }
+
+    .resume-contact-role {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--color-accent, #2563eb);
+    }
+
+    .resume-contact-icons {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .contact-icon-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        color: var(--color-accent, #2563eb);
+        background: var(--color-bg-secondary, #f3f4f6);
+        border: 1px solid var(--color-border, #e5e7eb);
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .contact-icon-link:hover {
+        background: var(--color-accent, #2563eb);
+        color: #fff;
+        border-color: var(--color-accent, #2563eb);
+    }
+
+    .contact-icon-link :global(svg) {
+        width: 20px;
+        height: 20px;
+    }
+
+    .resume-contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.25rem 1rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--color-border, #e5e7eb);
+    }
+
+    .resume-contact-value {
+        font-size: 0.95rem;
+        color: var(--color-text, #111827);
+        text-decoration: none;
+    }
+
+    .resume-contact-value:hover {
+        color: var(--color-accent, #2563eb);
+        text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+        .experience-header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .experience-meta {
+            text-align: right;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+    }
+
+    @media print {
+        .resume-section {
+            page-break-inside: avoid;
+        }
+
+        .experience-item {
+            page-break-inside: avoid;
+        }
+    }
+</style>

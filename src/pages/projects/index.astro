@@ -1,0 +1,115 @@
+---
+import MainLayout from "../../layouts/Main.astro";
+---
+
+<MainLayout title="Projects">
+    <div class="page">
+        <header class="page-header">
+            <p class="eyebrow">Selected Work</p>
+            <h1>Projects</h1>
+            <p class="lead">
+                A collection of my projects. Detailed case studies are being added — check back soon.
+            </p>
+        </header>
+
+        <div class="projects-grid">
+            <article class="project-card">
+                <h2 class="project-title">Coming Soon</h2>
+                <p class="project-desc">
+                    Project highlights from coursework, automation tooling, and personal builds will live here.
+                </p>
+                <span class="project-status">In progress</span>
+            </article>
+
+            <article class="project-card">
+                <h2 class="project-title">Coming Soon</h2>
+                <p class="project-desc">
+                    Each entry will include a description, the stack used, and links to the source or a live demo.
+                </p>
+                <span class="project-status">In progress</span>
+            </article>
+
+            <article class="project-card">
+                <h2 class="project-title">Coming Soon</h2>
+                <p class="project-desc">
+                    Stay tuned for featured deployments and open-source contributions.
+                </p>
+                <span class="project-status">In progress</span>
+            </article>
+        </div>
+    </div>
+</MainLayout>
+
+<style>
+    .page {
+        max-width: clamp(20rem, 90vw, 60rem);
+        margin: 0 auto;
+        padding: 2.5rem 3rem;
+    }
+
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .eyebrow {
+        margin: 0;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-accent, #2563eb);
+    }
+
+    h1 {
+        margin: 0.25rem 0 0;
+        font-size: clamp(2rem, 5vw, 3.25rem);
+        line-height: 1.1;
+    }
+
+    .lead {
+        margin: 0.75rem 0 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--color-muted, #4b5563);
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.5rem;
+        background: var(--color-bg-secondary, #f3f4f6);
+        border: 1px solid var(--color-border, #e5e7eb);
+        border-radius: 8px;
+        border-top: 4px solid var(--color-accent, #2563eb);
+    }
+
+    .project-title {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+
+    .project-desc {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--color-muted, #4b5563);
+    }
+
+    .project-status {
+        margin-top: auto;
+        align-self: flex-start;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-accent, #2563eb);
+    }
+</style>
