@@ -7,7 +7,6 @@ const { title } = Astro.props;
 ---
 
 <MainLayout title={title || "Home"}>
-    <div class="resume">
         <!-- Contact Header (top) -->
         <div class="resume-contact-header">
             <div class="resume-contact-head">
@@ -125,24 +124,9 @@ const { title } = Astro.props;
                 ))}
             </ul>
         </section>
-    </div>
 </MainLayout>
 
 <style>
-    .resume {
-        max-width: clamp(20rem, 90vw, 70rem);
-        margin: 0 auto;
-        padding: 2.5rem 3rem;
-        background: var(--color-bg-secondary, #f3f4f6);
-    }
-
-    /* .resume {
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-        padding: 0 5rem;
-    } */
-
     .resume-section {
         display: flex;
         flex-direction: column;

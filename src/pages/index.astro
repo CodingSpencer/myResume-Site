@@ -3,18 +3,14 @@ import MainLayout from "../layouts/Main.astro";
 ---
 
 <MainLayout title="Home">
-    <section class="home">
-        <p class="eyebrow">Portfolio</p>
-        <h1>Spencer’s Resume</h1>
-        <p class="lead">
-            This is a placeholder home page for the site. Use the sidebar to jump between sections,
-            or open the full resume to view the current profile.
+        <section class="home">
+        <p class="eyebrow">Home</p>
+        <h1>Spencer’s Website</h1>
+        <p class="lead"> Welcome to my website!<br><br> 
+            I'm a software engineer and a paralegal, and I love building projects with new technologies to help make different tasks easier for different people. I will graduate with a bachelor's degree in Software Engineering from BYU-Idaho in Fall 2026, and I've loved my time there. My specialties during my time at BYU-Idaho have been Linux, web development, and database/backend development.<br><br> 
+            I've been taking classes remotely while working as a paralegal in Utah County. I love all things movies, disc golf, ping pong, and Linux! Whenever I'm not doing one of those things, I'm usually spending time with my wife, family, or friends. 
         </p>
-
-        <div class="actions">
-            <a class="button button--primary" href="/resume">View resume</a>
-            <a class="button button--secondary" href="/experience">Explore experience</a>
-        </div>
+        <p><b>To learn more about me visit my <a class="button--link" href="/about">About Me</a> page.</b></p>
     </section>
 </MainLayout>
 
@@ -83,4 +79,19 @@ import MainLayout from "../layouts/Main.astro";
         color: var(--color-text, #111827);
         background: transparent;
     }
+
+    .button--link {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: var(--color-accent, #2563eb);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .button--link:hover {
+        background-color: var(--color-accent-dark, #1d4ed8);
+    }
+
 </style>

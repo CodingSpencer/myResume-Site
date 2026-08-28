@@ -6,6 +6,7 @@
         { href: "/resume", title: "Resume" },
         { href: "/experience", title: "Experience" },
         { href: "/projects", title: "Projects" },
+        { href: "/about", title: "About Me" },
         { href: "/sandbox", title: "Sandbox" },
         { href: "/contact", title: "Contact" },
     ];
@@ -49,7 +50,7 @@
 
 <aside class="sidebar" class:sidebar--open={isOpen} id="sidebar-nav">
     <div class="sidebar-content">
-        <p class="sidebar__title">Spencer's Resume</p>
+        <p class="sidebar__title">Spencer's Website</p>
         <nav aria-label="Sidebar Navigation">
             <ul>
                 {#each navLinks as navLink}
@@ -108,7 +109,7 @@
         max-width: 80vw;
         background: var(--color-bg, #fff);
         border-right: 1px solid var(--color-border, #e5e7eb);
-        padding: 5rem 1.5rem 2rem;
+        padding: 5rem 0 2rem;
         transform: translateX(-100%);
         transition: transform 0.2s ease;
         z-index: 50;
@@ -121,6 +122,7 @@
     
     .sidebar__title {
         margin: 0.15rem 0 1.5rem;
+        padding: 0 1.5rem;
         color: var(--color-muted, #6b7280);
         font-size: 0.9rem;
     }
@@ -131,17 +133,32 @@
         padding: 0;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
     }
-    
+
     .sidebar nav a {
-        text-decoration: none;
+        display: flex;
+        width: 100%;
+        padding: 0.6rem 1.5rem;
+        border: 1px solid var(--color-border, #e5e7eb);
+        margin-top: -1px;
+        background: var(--color-bg, #fff);
         color: var(--color-text, #111827);
+        text-decoration: none;
         font-size: 1rem;
+        transition: border-color 0.2s ease, background 0.2s ease,
+            color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
-    
+
+    .sidebar nav li:first-child a {
+        margin-top: 0;
+    }
+
     .sidebar nav a:hover {
+        border-color: var(--color-accent, #2563eb);
+        background: var(--color-bg-secondary, #f3f4f6);
         color: var(--color-accent, #2563eb);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
     
     @media print {
