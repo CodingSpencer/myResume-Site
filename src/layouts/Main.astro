@@ -14,10 +14,43 @@ const { title } = Astro.props;
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
+        <script is:inline>
+            // Anti-FOUC theme script: apply the correct color-scheme before
+            // first paint so there's no flash of the wrong theme.
+            // Defaults to the OS preference ("system") unless the user has
+            // explicitly chosen light/dark (persisted in localStorage).
+            (function () {
+                var stored = localStorage.getItem("theme-preference");
+                var theme =
+                    stored === "light" || stored === "dark"
+                        ? stored
+                        : "system";
+                var root = document.documentElement;
+
+                function apply() {
+                    var dark =
+                        theme === "dark" ||
+                        (theme === "system" &&
+                            window.matchMedia("(prefers-color-scheme: dark)")
+                                .matches);
+                    root.style.colorScheme = dark ? "dark" : "light";
+                }
+
+                apply();
+
+                // Keep "system" in sync if the OS scheme changes while the
+                // page is open.
+                if (theme === "system") {
+                    window
+                        .matchMedia("(prefers-color-scheme: dark)")
+                        .addEventListener("change", apply);
+                }
+            })();
+        </script>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title || "My Resume"}</title>
-        <link rel="stylesheet" href="/assets/css/main.css" />
+        <link rel="stylesheet" href="/css/main.css" />
     </head>
     <body>
         <Sidebar client:load />
