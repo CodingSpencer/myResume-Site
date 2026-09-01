@@ -1,20 +1,22 @@
 /* COLORS */
 :root {
-    /* Palette: deep navy / ocean blues
-       prussian-blue #000022 · deep-navy #001242 · ocean-blue #0094c6
-       baltic-blue #005e7c · ink-black #040f16 */
+   --color-accent: light-dark(#0094c6, #0094c6);  /* ocean-blue */
+   --color-accent-dark: light-dark(#005e7c, #33b8e0);
+   --color-text: light-dark(#040f16, #e6f6fb);
+   --color-muted: light-dark(#005e7c, #8fc6d8);
+   --color-bg: light-dark(#ffffff, #001242);        /* deep-navy */
+   --color-bg-secondary: light-dark(#e6f6fb, #040f16); /* ink-black */
+   --color-border: light-dark(#bfe2f0, #005e7c);    /* baltic-blue */
+   --color-image-border: #0094c6;                    /* ocean-blue */
 
-    /* `light-dark()` resolves via `color-scheme`, which is controlled by
-       components/theme-toggle.css (light | dark | system). The system default
-       check lives there: @media (prefers-color-scheme: dark) when "system"
-       is selected. */
 
-    --color-accent: light-dark(#0094c6, #0094c6);  /* ocean-blue */
-    --color-accent-dark: light-dark(#005e7c, #33b8e0);
-    --color-text: light-dark(#040f16, #e6f6fb);
-    --color-muted: light-dark(#005e7c, #8fc6d8);
-    --color-bg: light-dark(#ffffff, #001242);        /* deep-navy */
-    --color-bg-secondary: light-dark(#e6f6fb, #040f16); /* ink-black */
-    --color-border: light-dark(#bfe2f0, #005e7c);    /* baltic-blue */
-    --color-image-border: #0094c6;                    /* ocean-blue */
+   --header-text: var(--color-text);
+
+   --surface-color: var(--color-bg-secondary);
+   --border-color: var(--color-border);
+   --accent-color: var(--color-accent);
+   --bg-color: var(--color-bg);
+   
+   --theme-toggle-bg: var(--color-bg);
+   --theme-toggle-border: var(--color-border);
 }
