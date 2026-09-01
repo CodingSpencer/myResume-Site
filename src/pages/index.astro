@@ -1,16 +1,31 @@
 ---
 import MainLayout from "../layouts/Main.astro";
+import { Image } from "astro:assets";
+import headshot from "../assets/imgs/Professional/Resume_Headshot.jpg";
 ---
 
 <MainLayout title="Home">
         <section class="home">
         <p class="eyebrow">Home</p>
         <h1>Spencer’s Website</h1>
-        <p class="lead"> Welcome to my website!<br><br> 
-            I'm a software engineer and a paralegal, and I love building projects with new technologies to help make different tasks easier for different people. I will graduate with a bachelor's degree in Software Engineering from BYU-Idaho in Fall 2026, and I've loved my time there. My specialties during my time at BYU-Idaho have been Linux, web development, and database/backend development.<br><br> 
-            I've been taking classes remotely while working as a paralegal in Utah County. I love all things movies, disc golf, ping pong, and Linux! Whenever I'm not doing one of those things, I'm usually spending time with my wife, family, or friends. 
-        </p>
-        <p><b>To learn more about me visit my <a class="button--link" href="/about">About Me</a> page.</b></p>
+        <div class="home__body">
+            <Image
+                class="home__portrait"
+                src={headshot}
+                alt="Spencer’s headshot"
+                width={300}
+                format="webp"
+                quality={90}
+                densities={[1, 2]}
+            />
+            <div class="home__lead">
+                <p class="lead"> Welcome to my website!<br><br> 
+                    I'm a software engineer and a paralegal, and I love building projects with new technologies to help make different tasks easier for different people. I will graduate with a bachelor's degree in Software Engineering from BYU-Idaho in Fall 2026, and I've loved my time there. My specialties during my time at BYU-Idaho have been Linux, web development, and database/backend development.<br><br> 
+                    I've been taking classes remotely while working as a paralegal in Utah County. I love all things movies, disc golf, ping pong, and Linux! Whenever I'm not doing one of those things, I'm usually spending time with my wife, family, or friends. 
+                </p>
+                <p><b>To learn more about me visit my <a class="button--link" href="/about">About Me</a> page.</b></p>
+            </div>
+        </div>
     </section>
 </MainLayout>
 
@@ -20,8 +35,36 @@ import MainLayout from "../layouts/Main.astro";
         flex-direction: column;
         justify-content: center;
         min-height: 60vh;
-        max-width: 640px;
+        max-width: 960px;
         gap: 1rem;
+    }
+
+    .home__body {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .home__lead {
+        flex: 1 1 260px;
+        min-width: 0;
+        order: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .home__portrait {
+        flex: 0 0 auto;
+        order: 1;
+        width: clamp(160px, 28vw, 300px);
+        height: clamp(160px, 28vw, 300px);
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: 50% 25%;
+        border: 8px solid var(--color-image-border, #0094c6);
+        box-shadow: 8px 8px 24px rgba(0, 0, 22, 0.25), 0 2px 8px rgba(0, 0, 22, 0.15);
     }
 
     .eyebrow {
