@@ -3,12 +3,10 @@
     color-scheme: light;
 }
 
-/* Shift engine state to dark if the dark input is checked */
 html:has(input[name="theme-preference"][value="dark"]:checked) {
     color-scheme: dark;
 }
 
-/* Check system settings only if the user chooses 'system' */
 @media (prefers-color-scheme: dark) {
     html:has(input[name="theme-preference"][value="system"]:checked) {
         color-scheme: dark;

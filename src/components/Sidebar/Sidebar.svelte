@@ -1,5 +1,8 @@
 <script>
+    import { onMount } from "svelte";
+
     let isOpen = false;
+    let selectedTheme = "system";
 
     const navLinks = [
         { href: "/", title: "Home" },
@@ -10,6 +13,36 @@
         { href: "/sandbox", title: "Sandbox" },
         { href: "/contact", title: "Contact" },
     ];
+
+    const themeOptions = [
+        { value: "light", label: "☀️ Light" },
+        { value: "dark", label: "🌖 Dark" },
+        { value: "system", label: "⚙️ System" },
+    ];
+
+    function applyTheme(theme) {
+        const root = document.documentElement;
+        const dark =
+            theme === "dark" ||
+            (theme === "system" &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches);
+        root.style.colorScheme = dark ? "dark" : "light";
+    }
+
+    onMount(() => {
+        // Use the previously saved preference, else fall back to "system".
+        const saved = localStorage.getItem("theme-preference");
+        if (saved === "light" || saved === "dark" || saved === "system") {
+            selectedTheme = saved;
+        }
+        applyTheme(selectedTheme);
+    });
+
+    function saveTheme(event) {
+        selectedTheme = event.currentTarget.value;
+        localStorage.setItem("theme-preference", selectedTheme);
+        applyTheme(selectedTheme);
+    }
 
     function toggleSidebar() {
         isOpen = !isOpen;
@@ -28,17 +61,19 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<button
-    class="hamburger"
-    aria-label={isOpen ? "Close Menu" : "Open Menu"}
-    aria-expanded={isOpen}
-    aria-controls="sidebar-nav"
-    on:click={toggleSidebar}
->
-    <span class="hamburger__bar"></span>
-    <span class="hamburger__bar"></span>
-    <span class="hamburger__bar"></span>
-</button>
+<div class="topbar">
+    <button
+        class="hamburger"
+        aria-label={isOpen ? "Close Menu" : "Open Menu"}
+        aria-expanded={isOpen}
+        aria-controls="sidebar-nav"
+        on:click={toggleSidebar}
+    >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+    </button>
+</div>
 
 {#if isOpen}
     <button
@@ -48,9 +83,27 @@
     ></button>
 {/if}
 
-<aside class="sidebar" class:sidebar--open={isOpen} id="sidebar-nav">
+<aside class="sidebar" class:sidebar-open={isOpen} id="sidebar-nav">
+    <details class="theme-switcher">
+        <summary class="theme-control">
+            <span class="visually-hidden">Select theme</span>
+        </summary>
+        <div class="theme-extra">
+            {#each themeOptions as option}
+                <label class="theme-label">
+                    <input
+                        type="radio"
+                        name="theme-preference"
+                        value={option.value}
+                        bind:group={selectedTheme}
+                        on:change={saveTheme}
+                    />
+                    <span>{option.label}</span>
+                </label>
+            {/each}
+        </div>
+    </details>
     <div class="sidebar-content">
-        <p class="sidebar__title">Spencer's Website</p>
         <nav aria-label="Sidebar Navigation">
             <ul>
                 {#each navLinks as navLink}
@@ -61,14 +114,21 @@
             </ul>
         </nav>
     </div>
+    <p class="sidebar-title">Spencer's Website</p>
 </aside>
 
 <style>
-    .hamburger {
+    .topbar {
         position: fixed;
         top: 1rem;
         left: 1rem;
         z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .hamburger {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -82,7 +142,7 @@
         padding: 0;
     }
     
-    .hamburger__bar {
+    .hamburger-bar {
         display: block;
         width: 22px;
         height: 2px;
@@ -116,15 +176,38 @@
         overflow-y: auto;
     }
     
-    .sidebar--open {
+    .sidebar-open {
         transform: translateX(0);
     }
-    
-    .sidebar__title {
+
+    .sidebar-title {
         margin: 0.15rem 0 1.5rem;
-        padding: 0 1.5rem;
+        padding: 1.5rem;
         color: var(--color-muted, #6b7280);
-        font-size: 0.9rem;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+    
+    .theme-switcher {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: var(--color-text, #111827);
+    }
+
+    /* Vertically center the label/icon inside the trigger. The global
+       theme-toggle.css uses `inline-list-item`, which ignores align-items;
+       switch to flex so the pill content is truly centered, and give the
+       trigger a fixed 44px height to match the hamburger. */
+    .theme-switcher > summary.theme-control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        min-height: 44px;
+        padding: 0 0.75rem;
+        border-radius: 6px;
+        box-sizing: border-box;
     }
     
     .sidebar nav ul {
@@ -163,6 +246,7 @@
     
     @media print {
         .hamburger,
+        .theme-switcher,
         .sidebar,
         .sidebar-backdrop {
             display: none;
